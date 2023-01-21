@@ -22,4 +22,18 @@ struct Service {
             
         }.resume()
     }
+    
+    func getCharactersDetails(characterId: Int, completionHandler: @escaping (_ characters: Characters) -> Void) {
+        
+        let url = URL(string: "https://rickandmortyapi.com/api/character/\(characterId)")!
+                
+        URLSession.shared.dataTask(with: url) { data, urlResponse, error in
+            
+            let decoder = JSONDecoder()
+            
+            let characterDetailsResponse = try! decoder.decode(CharacterDetailsResponse.self, from: data!)
+            completionHandler(characterDetailsResponse.results!)
+            
+        }.resume()
+    }
 }

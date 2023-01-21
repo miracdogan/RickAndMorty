@@ -23,14 +23,12 @@ class CharactersViewController: UIViewController, UITableViewDataSource, UITable
         tableView.dataSource = self
         tableView.delegate = self
         let nib = UINib(nibName: "CharacterTableViewCell", bundle: Bundle(for: CharacterTableViewCell.self))
-        
         tableView.register(nib, forCellReuseIdentifier: "CharacterTableViewCell")
     }
     
     private func fetchCategories() {
      
         let service = Service()
-        
         service.getCharacters { characters in
             self.characters = characters
             DispatchQueue.main.async {
@@ -51,7 +49,13 @@ class CharactersViewController: UIViewController, UITableViewDataSource, UITable
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 66
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let characterId = characters[indexPath.row].id!
+        let characterDetailsViewController = CharacterDetailsViewController(characterId: characterId)
+        
+        self.navigationController?.pushViewController(characterDetailsViewController, animated: true)
     }
+    
+
 }
