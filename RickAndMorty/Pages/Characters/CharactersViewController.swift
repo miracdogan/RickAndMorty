@@ -56,6 +56,4 @@ class CharactersViewController: UIViewController, UITableViewDataSource, UITable
         
         self.navigationController?.pushViewController(characterDetailsViewController, animated: true)
     }
-    
-
 }
