@@ -22,27 +22,45 @@
                             <constraint firstAttribute="width" secondItem="s5U-p1-x1b" secondAttribute="height" id="jMz-JX-trh"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BGH-Ym-BX1">
-                        <rect key="frame" x="44" y="0.0" width="276" height="44"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BGH-Ym-BX1">
+                        <rect key="frame" x="44" y="0.0" width="276" height="33.666666666666664"/>
                         <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WT5-t1-oDW">
+                        <rect key="frame" x="94" y="-2" width="109" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uti-4b-bvm">
+                        <rect key="frame" x="228" y="-2" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="bottom" secondItem="WT5-t1-oDW" secondAttribute="bottom" constant="25" id="Dhp-H2-OJs"/>
+                    <constraint firstAttribute="bottom" secondItem="uti-4b-bvm" secondAttribute="bottom" constant="25" id="EdM-HK-KND"/>
+                    <constraint firstItem="WT5-t1-oDW" firstAttribute="leading" secondItem="s5U-p1-x1b" secondAttribute="trailing" constant="50" id="JU5-dT-qc0"/>
+                    <constraint firstAttribute="trailing" secondItem="uti-4b-bvm" secondAttribute="trailing" constant="50" id="Suo-kJ-dt8"/>
                     <constraint firstItem="s5U-p1-x1b" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="VyG-OJ-Wo1"/>
                     <constraint firstItem="BGH-Ym-BX1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ZNI-sQ-QDE"/>
                     <constraint firstItem="s5U-p1-x1b" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="a2L-g2-1S0"/>
                     <constraint firstAttribute="trailing" secondItem="BGH-Ym-BX1" secondAttribute="trailing" id="c8B-ok-Dr5"/>
                     <constraint firstItem="BGH-Ym-BX1" firstAttribute="leading" secondItem="s5U-p1-x1b" secondAttribute="trailing" id="fa8-Oo-smh"/>
                     <constraint firstAttribute="bottom" secondItem="s5U-p1-x1b" secondAttribute="bottom" id="il7-At-BTQ"/>
-                    <constraint firstAttribute="bottom" secondItem="BGH-Ym-BX1" secondAttribute="bottom" id="lWR-kg-M25"/>
+                    <constraint firstItem="uti-4b-bvm" firstAttribute="leading" secondItem="WT5-t1-oDW" secondAttribute="trailing" constant="25" id="miM-xv-bXn"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="characterImageView" destination="s5U-p1-x1b" id="FKz-x3-kEN"/>
                 <outlet property="nameLabel" destination="BGH-Ym-BX1" id="uy9-5T-34K"/>
+                <outlet property="speciesLabel" destination="uti-4b-bvm" id="Ouk-4w-kwk"/>
+                <outlet property="statusLabel" destination="WT5-t1-oDW" id="xRw-ef-7rv"/>
             </connections>
             <point key="canvasLocation" x="120.61068702290076" y="-14.084507042253522"/>
         </tableViewCell>
