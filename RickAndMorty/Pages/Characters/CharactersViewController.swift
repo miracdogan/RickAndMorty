@@ -8,17 +8,19 @@
 import UIKit
 
 class CharactersViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+    
     @IBOutlet weak var tableView: UITableView!
+    
     
     var characters: [Characters] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        title = "Characters"
+        navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.setHidesBackButton(true, animated: false)
         
-        fetchCategories()
+        fetchCharacters()
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -26,8 +28,8 @@ class CharactersViewController: UIViewController, UITableViewDataSource, UITable
         tableView.register(nib, forCellReuseIdentifier: "CharacterTableViewCell")
     }
     
-    private func fetchCategories() {
-     
+    private func fetchCharacters() {
+        
         let service = Service()
         service.getCharacters { characters in
             self.characters = characters
@@ -55,5 +57,9 @@ class CharactersViewController: UIViewController, UITableViewDataSource, UITable
         let characterDetailsViewController = CharacterDetailsViewController(characterId: characterId)
         
         self.navigationController?.pushViewController(characterDetailsViewController, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 125.0;
     }
 }

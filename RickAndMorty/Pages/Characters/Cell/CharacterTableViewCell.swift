@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class CharacterTableViewCell: UITableViewCell {
 
@@ -15,6 +16,7 @@ class CharacterTableViewCell: UITableViewCell {
     func configure(with character: Characters) {
         
         nameLabel.text = character.name
-        //characterImageView.setImage(with: character.image!)
+        characterImageView.setImage(with: character.image!)
     }
 }
+ 

@@ -8,7 +8,7 @@
 import UIKit
 
 class CharacterDetailsViewController: UIViewController {
-
+    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     
@@ -32,17 +32,20 @@ class CharacterDetailsViewController: UIViewController {
     }
     
     private func fetchCharacterDetails() {
-        
         let service = Service()
         
-        service.getCharactersDetails(characterId: characterId) { character in
+        service.getCharactersDetails(characterId: characterId) { result in
             
-            DispatchQueue.main.async {
-                
-                self.character = character
-                
-                //self.imageView.setImage(with: character.image!)
-                self.nameLabel.text = character.name
+            DispatchQueue.main.async { [self] in
+                switch result {
+                case .success(let chracter):
+                    self.character = self.character
+                    
+                    // self.imageView.setImage(with: character.image!)
+                    self.nameLabel.text = character?.name
+                case .failure(let error):
+                    print(error)
+                }
             }
         }
     }

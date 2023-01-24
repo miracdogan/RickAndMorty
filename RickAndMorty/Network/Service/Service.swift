@@ -23,17 +23,36 @@ struct Service {
         }.resume()
     }
     
-    func getCharactersDetails(characterId: Int, completionHandler: @escaping (_ characters: Characters) -> Void) {
-        
-        let url = URL(string: "https://rickandmortyapi.com/api/character/\(characterId)")!
-                
-        URLSession.shared.dataTask(with: url) { data, urlResponse, error in
-            
-            let decoder = JSONDecoder()
-            
-            let characterDetailsResponse = try! decoder.decode(CharacterDetailsResponse.self, from: data!)
-            completionHandler(characterDetailsResponse.results!)
-            
-        }.resume()
-    }
+    func getCharactersDetails(characterId: Int, completionHandler: @escaping (_ result: Result<Characters, Error>) -> Void) {
+                // URL KONTROL
+                guard let url = URL(string: "https://rickandmortyapi.com/api/character/\(characterId)") else {
+                    completionHandler(.failure("URL_OLUSTURULURKEN_HATA_MESAJI" as! Error))
+                    return
+                }
+
+                URLSession.shared.dataTask(with: url) { data, _, error in
+
+                    // SISTEM TARAFINDAN GONDERILEN HATA KONTROLU. INTERNETINIZ YOK VS
+                    guard error == nil else {
+                        completionHandler(.failure(error!))
+                        return
+                    }
+
+                    // NETWORK REQUEST BASARILI FAKAT DATA BOS
+                    guard let data else {
+                        completionHandler(.failure("DATA_BOS_MESAJI" as! Error))
+                        return
+                    }
+
+                    let decoder = JSONDecoder()
+                    do {
+                        let response = try decoder.decode(Characters.self, from: data)
+                        completionHandler(.success(response))
+                    } catch {
+                        // GELEN DATAYI PARSE(decode) EDERKEN GELEN HATA
+                        completionHandler(.failure(error))
+                    }
+
+                }.resume()
+            }
 }
