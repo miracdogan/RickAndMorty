@@ -9,10 +9,19 @@ import UIKit
 
 class CharactersViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView! {
+        didSet {
+            tableView.dataSource = self
+            tableView.delegate = self
+            let nib = UINib(nibName: "CharacterTableViewCell", bundle: Bundle(for: CharacterTableViewCell.self))
+            tableView.register(nib, forCellReuseIdentifier: "CharacterTableViewCell")
+        }
+    }
     
     
     var characters: [Characters] = []
+    var spinner = UIActivityIndicatorView()
+    let service = Service()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,19 +30,15 @@ class CharactersViewController: UIViewController, UITableViewDataSource, UITable
         self.navigationItem.setHidesBackButton(true, animated: false)
         
         fetchCharacters()
-        
-        tableView.dataSource = self
-        tableView.delegate = self
-        let nib = UINib(nibName: "CharacterTableViewCell", bundle: Bundle(for: CharacterTableViewCell.self))
-        tableView.register(nib, forCellReuseIdentifier: "CharacterTableViewCell")
     }
     
     private func fetchCharacters() {
-        
-        let service = Service()
-        service.getCharacters { characters in
-            self.characters = characters
+        self.spinner.startAnimating()
+        service.getCharacters {[weak self] characters in
+            guard let self else { return }
+            self.stopAnimation()
             DispatchQueue.main.async {
+                self.characters.append(contentsOf: characters)
                 self.tableView.reloadData()
             }
         }
@@ -66,10 +71,8 @@ class CharactersViewController: UIViewController, UITableViewDataSource, UITable
     func createSpinnerFooter()  -> UIView {
         let footerView = UIView(frame:  CGRect(x: 0, y: 0, width: view.frame.size.width, height: 100))
         
-        let spinner = UIActivityIndicatorView()
         spinner.center = footerView.center
         footerView.addSubview(spinner)
-        spinner.startAnimating()
         
         return footerView
     }
@@ -78,25 +81,12 @@ class CharactersViewController: UIViewController, UITableViewDataSource, UITable
         
         let position = scrollView.contentOffset.y
         if position > (tableView.contentSize.height - 100 - scrollView.frame.size.height) {
-            
-            self.tableView.tableFooterView = createSpinnerFooter()
-            
-//            Service.getCharacters(pagination: true) { [weak self] result in
-//                self?.tableView.tableFooterView = nil
-//
-//                switch result {
-//                case .success(let moreData):
-//                    self?.data?.append(contentsOf: moreData)
-//                    DispatchQueue.main.async {
-//
-//                        self?.tableView.reloadData()
-//                    }
-//                case .failure(_):
-//                    break
-//                }
-//
-//            }
+            fetchCharacters()
         }
-            
+    }
+    
+    
+    private func stopAnimation() {
+//        self.spinner.stopAnimating()
     }
 }
