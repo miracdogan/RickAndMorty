@@ -76,26 +76,28 @@ class CharactersViewController: UIViewController, UITableViewDataSource, UITable
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
+        var service: Service()
+        
         let position = scrollView.contentOffset.y
         if position > (tableView.contentSize.height - 100 - scrollView.frame.size.height) {
             
             self.tableView.tableFooterView = createSpinnerFooter()
             
-//            Service.getCharacters(pagination: true) { [weak self] result in
-//                self?.tableView.tableFooterView = nil
-//
-//                switch result {
-//                case .success(let moreData):
-//                    self?.data?.append(contentsOf: moreData)
-//                    DispatchQueue.main.async {
-//
-//                        self?.tableView.reloadData()
-//                    }
-//                case .failure(_):
-//                    break
-//                }
-//
-//            }
+            Service.getCharacters(pagination: true) { [weak self] result in
+                self?.tableView.tableFooterView = nil
+                
+                switch result {
+                case .success(let moreData):
+                    self?.data?.append(contentsOf: moreData)
+                    DispatchQueue.main.async {
+                        
+                        self?.tableView.reloadData()
+                    }
+                case .failure(_):
+                    break
+                }
+                
+            }
         }
             
     }
