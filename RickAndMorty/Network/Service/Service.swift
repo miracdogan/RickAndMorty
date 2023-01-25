@@ -9,9 +9,10 @@ import Foundation
 
 struct Service {
     
-    func getCharacters(completionHandler: @escaping (_ characters: [Characters]) -> Void) {
+    func getCharacters(pagination:Bool = false, completionHandler: @escaping (_ characters: [Characters]) -> Void) {
         
-        let url = URL(string: "https://rickandmortyapi.com/api/character")!
+        let pageNumber = 1
+        let url = URL(string: "https://rickandmortyapi.com/api/character/?page=\(pageNumber)")!
                 
         URLSession.shared.dataTask(with: url) { data, urlResponse, error in
             
@@ -24,7 +25,7 @@ struct Service {
     }
     
     func getCharactersDetails(characterId: Int, completionHandler: @escaping (_ result: Result<Characters, Error>) -> Void) {
-                // URL KONTROL
+                // URL KONTROL›Buras
                 guard let url = URL(string: "https://rickandmortyapi.com/api/character/\(characterId)") else {
                     completionHandler(.failure("URL_OLUSTURULURKEN_HATA_MESAJI" as! Error))
                     return
