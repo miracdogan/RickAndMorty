@@ -7,20 +7,27 @@
 
 import Foundation
 
-struct Service {
+class Service {
+    
+    var pageNumber = 1
     
     func getCharacters(pagination:Bool = false, completionHandler: @escaping (_ characters: [Characters]) -> Void) {
         
-        let pageNumber = 1
-        let url = URL(string: "https://rickandmortyapi.com/api/character/?page=\(pageNumber)")!
+        guard let url = URL(string: "https://rickandmortyapi.com/api/character/?page=\(pageNumber)") else { return }
                 
-        URLSession.shared.dataTask(with: url) { data, urlResponse, error in
-            
+        URLSession.shared.dataTask(with: url) {[weak self] data, urlResponse, error in
+            guard let self else { return }
             let decoder = JSONDecoder()
             
-            let characterResponse = try! decoder.decode(CharacterResponse.self, from: data!)
-            completionHandler(characterResponse.results ?? [])
-            
+            do {
+                let characterResponse = try decoder.decode(CharacterResponse.self, from: data!)
+                if characterResponse.results?.count == 20 {
+                    self.pageNumber = self.pageNumber + 1
+                }
+                completionHandler(characterResponse.results ?? [])
+            } catch {
+                completionHandler([])
+            }
         }.resume()
     }
     
