@@ -26,8 +26,7 @@ class CharactersViewController: UIViewController, UITableViewDataSource, UITable
         title = "Characters"
         navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.setHidesBackButton(true, animated: false)
-        
-        fetchCharacters()
+
     }
     
     private func fetchCharacters() {

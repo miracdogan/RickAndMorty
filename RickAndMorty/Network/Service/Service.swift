@@ -12,7 +12,7 @@ class Service {
     var pageNumber = 1
     
     func getCharacters(pagination:Bool = false, completionHandler: @escaping (_ characters: [Characters]) -> Void) {
-        
+        print("Test")
         guard let url = URL(string: "https://rickandmortyapi.com/api/character/?page=\(pageNumber)") else { return }
         
         URLSession.shared.dataTask(with: url) {[weak self] data, urlResponse, error in
