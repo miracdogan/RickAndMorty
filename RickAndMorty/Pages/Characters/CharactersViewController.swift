@@ -71,20 +71,19 @@ class CharactersViewController: UIViewController, UITableViewDataSource, UITable
         
         spinner.center = footerView.center
         footerView.addSubview(spinner)
+        spinner.startAnimating()
         
         return footerView
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
         let position = scrollView.contentOffset.y
         if position > (tableView.contentSize.height - 100 - scrollView.frame.size.height) {
             fetchCharacters()
         }
     }
     
-    
     private func stopAnimation() {
-//        self.spinner.stopAnimating()
+        //self.spinner.stopAnimating()
     }
 }

@@ -9,12 +9,11 @@ import UIKit
 import Kingfisher
 
 class CharacterTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var characterImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var speciesLabel: UILabel!
-    
     
     func configure(with character: Characters) {
         
@@ -24,4 +23,4 @@ class CharacterTableViewCell: UITableViewCell {
         characterImageView.setImage(with: character.image!)
     }
 }
- 
+

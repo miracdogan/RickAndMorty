@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct CharacterResponse: Decodable {
     
     //let info: String?
