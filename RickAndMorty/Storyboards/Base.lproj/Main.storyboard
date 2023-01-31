@@ -47,16 +47,27 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Iyn-mR-D6M">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <rect key="frame" x="0.0" y="169" width="393" height="683"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="1x2-DG-LgB">
+                                <rect key="frame" x="0.0" y="113" width="393" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="a58-TB-yYd" id="XIH-Cl-pKU"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="nIe-PB-2Kk"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Iyn-mR-D6M" firstAttribute="top" secondItem="zzd-Fn-fi7" secondAttribute="top" id="1B1-q4-4MI"/>
+                            <constraint firstItem="Iyn-mR-D6M" firstAttribute="top" secondItem="1x2-DG-LgB" secondAttribute="bottom" id="570-8K-GvT"/>
+                            <constraint firstItem="1x2-DG-LgB" firstAttribute="leading" secondItem="nIe-PB-2Kk" secondAttribute="leading" id="Dyu-qV-bcV"/>
+                            <constraint firstItem="1x2-DG-LgB" firstAttribute="top" secondItem="nIe-PB-2Kk" secondAttribute="top" constant="10" id="T7d-dh-7gr"/>
+                            <constraint firstItem="Iyn-mR-D6M" firstAttribute="top" secondItem="1x2-DG-LgB" secondAttribute="bottom" id="UQE-1c-Vin"/>
                             <constraint firstAttribute="bottom" secondItem="Iyn-mR-D6M" secondAttribute="bottom" id="YY6-k3-hfj"/>
                             <constraint firstItem="Iyn-mR-D6M" firstAttribute="trailing" secondItem="nIe-PB-2Kk" secondAttribute="trailing" id="b2b-3d-gfQ"/>
+                            <constraint firstItem="1x2-DG-LgB" firstAttribute="trailing" secondItem="nIe-PB-2Kk" secondAttribute="trailing" id="cLD-SQ-Yif"/>
                             <constraint firstItem="Iyn-mR-D6M" firstAttribute="leading" secondItem="nIe-PB-2Kk" secondAttribute="leading" id="mAr-Tk-8Tj"/>
                         </constraints>
                     </view>
